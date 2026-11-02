@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Student Performance Dashboard</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Student Performance Dashboard</h1>
+        <p>Analyze and Monitor Student Academic Performance</p>
+    </header>
+
+    <!-- Dashboard Cards -->
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Students</h3>
+            <h2>{{ total_students }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>Average Marks</h3>
+            <h2>{{ average }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>Highest Marks</h3>
+            <h2>{{ highest }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>Lowest Marks</h3>
+            <h2>{{ lowest }}</h2>
+        </div>
+
+    </div>
+
+
+    <!-- Add Student Form -->
+
+    <section class="form-section">
+
+        <h2>Add New Student</h2>
+
+        <form action="/add" method="POST">
+
+            <input type="text"
+            name="name"
+            placeholder="Student Name"
+            required>
+
+            <input type="number"
+            name="math"
+            placeholder="Math Marks"
+            min="0" max="100"
+            required>
+
+            <input type="number"
+            name="science"
+            placeholder="Science Marks"
+            min="0" max="100"
+            required>
+
+            <input type="number"
+            name="english"
+            placeholder="English Marks"
+            min="0" max="100"
+            required>
+
+            <button type="submit">Add Student</button>
+
+        </form>
+
+    </section>
+
+
+    <!-- Student Records -->
+
+    <section class="table-section">
+
+        <h2>Student Records</h2>
+
+        {{ tables | safe }}
+
+    </section>
+
+
+    <!-- Graph Section -->
+
+    <h2 class="graph-heading">
+        Performance Visualization
+    </h2>
+
+    <div class="graph-container">
+
+        <div class="graph-card">
+
+            <h3>Student Total Marks</h3>
+
+            <img src="{{ url_for('static', filename='bar_chart.png') }}?v={{ graph_version }}">
+
+        </div>
+
+
+        <div class="graph-card">
+
+            <h3>Subject Performance</h3>
+
+            <img src="{{ url_for('static', filename='pie_chart.png') }}?v={{ graph_version }}">
+
+        </div>
+
+
+        <div class="graph-card">
+
+            <h3>Subject Average Comparison</h3>
+
+            <img src="{{ url_for('static', filename='subject_chart.png') }}?v={{ graph_version }}">
+
+        </div>
+
+    </div>
+
+
+    <footer>
+        Student Marks Analysis | Python Web Application
+    </footer>
+
+</div>
+
+</body>
+
+</html>
